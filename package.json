@@ -51,6 +51,7 @@
 		"vite": "^7.2.6"
 	},
 	"dependencies": {
+		"@lucide/svelte": "^0.562.0",
 		"@neondatabase/serverless": "^1.0.2"
 	}
 }

@@ -5,10 +5,11 @@
 </script>
 
 <div class="app">
-	<main>{@render children()}</main>
-	<footer>
-		<p>footer</p>
-	</footer>
+  <header></header>
+	<main>
+    {@render children()}
+  </main>
+  <footer></footer>
 </div>
 
 <style>

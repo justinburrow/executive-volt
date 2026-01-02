@@ -1,57 +1,75 @@
 <script lang="ts">
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcomeFallback from '$lib/images/svelte-welcome.png';
+	import { createToolbar, melt } from '@melt-ui/svelte';
+  import { Omega } from '@lucide/svelte';
+
+  const {
+    elements: { root, button, link, separator },
+    builders: { createToolbarGroup }
+  } = createToolbar();
+  const {
+    elements: { group: typeGroup, item: typeItem },
+  } = createToolbarGroup({
+    type: 'single'
+  })
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Executive Volt</title>
+	<meta name="description" content="Personal electronic component inventory and project-allocation tool" />
 </svelte:head>
 
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcomeFallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
+<div class="max-w-7xl mx-auto my-4 p-4 bg-gray-100">
+  <section>
+	<h1>Executive Volt</h1>
 </section>
+
+<section>
+  <div
+    use:melt={$root}
+    class="flex min-w-max items-center gap-4 rounded-md bg-white px-3 py-3 text-neutral-700 shadow-sm lg:w-140"
+  >
+    <div class="flex items-center gap-1" use:melt={$typeGroup}>
+      <button class="item" aria-label="component type" use:melt={$typeItem('resistor')}>
+        <span class="sr-only">resistor</span>
+        <Omega />
+      </button>
+      <button class="item" aria-label="component type" use:melt={$typeItem('capacitor')}>
+        C
+      </button>
+      <button class="item" aria-label="component type" use:melt={$typeItem('potentiometer')}>
+        P
+      </button>
+      <button class="item" aria-label="component type" use:melt={$typeItem('switch')}>
+        S
+      </button>
+      <button class="item" aria-label="component type" use:melt={$typeItem('transistor')}>
+        T
+      </button>
+      <button class="item" aria-label="component type" use:melt={$typeItem('opamp')}>
+        O
+      </button>
+      <button class="item" aria-label="component type" use:melt={$typeItem('jack')}>
+        J
+      </button>
+      <button class="item" aria-label="component type" use:melt={$typeItem('valve')}>
+        V
+      </button>
+      <button class="item" aria-label="component type" use:melt={$typeItem('inductor')}>
+        I
+      </button>
+      <button class="item" aria-label="component type" use:melt={$typeItem('wire')}>
+        W
+      </button>
+    </div>
+  </div>
+</section>
+</div>
+
 
 <style>
 	section {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
 	}
 
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
 </style>
