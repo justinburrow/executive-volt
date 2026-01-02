@@ -41,7 +41,7 @@ export const components = pgTable(
 	'components',
 	{
 		id: uuid().primaryKey().defaultRandom().unique(),
-		type_id: uuid().references(() => componentTypes.id),
+		type_id: serial().references(() => componentTypes.id),
 
 		// common
 		name: varchar().notNull().unique(),
@@ -54,7 +54,7 @@ export const components = pgTable(
 		reorder_threshold: integer(),
 
 		// location
-		location_id: uuid().references(() => locations.id),
+		location_id: serial().references(() => locations.id),
 		location_detail: text(),
 
 		// specs
@@ -101,7 +101,7 @@ export const supplierPartNumbers = pgTable(
 );
 
 export const projects = pgTable('projects', {
-	id: uuid().primaryKey(),
+	id: uuid().primaryKey().defaultRandom().unique(),
 	name: varchar().unique().notNull(),
 	description: text(),
 	parts_lists: jsonb(),
@@ -109,7 +109,7 @@ export const projects = pgTable('projects', {
 });
 
 export const bom_lines = pgTable('bom_lines', {
-	id: uuid().primaryKey(),
+	id: uuid().primaryKey().defaultRandom().unique(),
 	project_id: uuid().references(() => projects.id),
 	component_id: uuid().references(() => components.id),
 	required_specs: jsonb().notNull(),
@@ -120,7 +120,7 @@ export const bom_lines = pgTable('bom_lines', {
 });
 
 export const purchases = pgTable('purchases', {
-	id: uuid().primaryKey(),
+	id: uuid().primaryKey().defaultRandom().unique(),
 	component_id: uuid().references(() => components.id),
 	supplier_id: serial().references(() => suppliers.id),
 	quantity: integer().notNull(),
